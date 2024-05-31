@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" class="form-control" v-model="description" />
+                        <textarea type="text" class="form-control" v-model="description"/>
                     </div>
                     <div class="form-group">
                         <label>Image</label>

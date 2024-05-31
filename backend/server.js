@@ -10,6 +10,41 @@ app.use(cors());
 app.use(bodyParser.json()); // Use bodyParser middleware to parse JSON request body
 
 
+
+// Endpoint to add user to the database
+app.post('/api/addUser', (req, res) => {
+    const { Email, Password, FirstName, LastName, Birthday, Gender, TelNumber } = req.body;
+    const query = 'INSERT INTO users (Email, Password, FirstName, LastName, Birthday, Gender, TelNumber) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    pool.query(query, [Email, Password, FirstName, LastName, Birthday, Gender, TelNumber], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.json({ message: 'Data added successfully' });
+        }
+    });
+});
+
+// Login endpoint
+// Login endpoint
+app.post('/api/userLogin', (req, res) => {
+    const { Email, Password } = req.body;
+    const query = 'SELECT * FROM users WHERE Email = ? AND Password = ?';
+    pool.query(query, [Email, Password], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            if (result.length > 0) {
+                res.status(200).json({ message: 'Login successful', user: result[0] });
+            } else {
+                res.status(401).json({ message: 'Invalid email or password' });
+            }
+        }
+    });
+});
+
+
 // Endpoint to fetch categories
 app.get('/api/categories', (req, res) => {
     pool.query('SELECT * FROM categories', (err, result) => {

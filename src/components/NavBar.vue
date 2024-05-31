@@ -34,68 +34,20 @@
     </form>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <button class="nav-link fas fa-user" @click="toggleSidebar">Log in, register</button><span class="sr-only">(current)</span>
-        <LoginRegister v-if="isSidebarOpen" /> 
+        <router-link class="nav-link fas fa-user" :to="{name : 'LoginRegister'}">
+          Log in, register<span class="sr-only">(current)</span>
+        </router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link fas fa-heart" :to="{name : ''}">  <span class="sr-only">(current)</span></router-link> 
+        <router-link class="nav-link fas fa-heart" :to="{name : 'wishesItems'}">  <span class="sr-only">(current)</span></router-link> 
       </li>
       <li class="nav-item">
-        <router-link class="nav-link fas fa-shopping-basket" :to="{name : ''}">  <span class="sr-only">(current)</span></router-link> 
+        <router-link class="nav-link fas fa-shopping-basket" :to="{name : 'shopping_bascket'}">  <span class="sr-only">(current)</span></router-link> 
       </li>
     </ul>
   </div>
 </nav>
 </template>
 
-<script>
-import LoginRegister from './LoginRegister.vue';
-export default {
-  components: {
-    LoginRegister ,
-  },
-  data() {
-    return {
-      isSidebarOpen: false // Default value
-    };
-  },
-  methods: {
-    toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen;
-    }
-  }
-};
-</script>
-
-<style lang="sass" scoped></style>
-  
-<style>
-  /* Sidebar styles */
-  .sidebar {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    right: -250px;
-    height: 100%;
-    transition: right 0.3s ease;
-  }
-  
-  .sidebar.open {
-    right: 0;
-  }
-  
-  /* Main content styles */
-  .main-content {
-    margin-right: 250px; /* Same width as sidebar */
-    transition: margin-right 0.3s ease;
-  }
-  
-  .main-content.open {
-    margin-right: 0;
-  }
-  
-  </style>
   
   
